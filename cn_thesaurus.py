@@ -272,3 +272,40 @@ with open('Documentos/Corpus_CN.csv', mode= 'r') as csvfile:
 cn_thesaurus = {'level': level, 'terms':terms}
 
 ## pickle.dump(cn_thesaurus, open("cn_thesaurus.pkl", "w"))
+
+'''
+Convert terms dict (utf-8) to a owl_words list (unicode form) :
+
+{'FRONTERA': ['\xe5\x9c\x8b\xe5\xa2\x83', '\xe9\x82\x8a\xe7\x95\x8c'],
+ 'VIDEOJUEGO': ['\xe9\x9b\xbb\xe7\x8e\xa9\xe9\x81\x8a\xe6\x88\xb2'],
+ 'DOCUMENTAL': ['\xe7\xb4\x80\xe9\x8c\x84\xe7\x89\x87'],
+ 'DEPORTES SOBRE RUEDAS': ['\xe8\xbc\xaa\xe4\xb8\x8a\xe9\x81\x8b\xe5\x8b\x95'],
+ 'UNION ECONOMICA Y MONETARIA': ['\xe7\xb6\x93\xe6\xbf\x9f\xe5\x92\x8c\xe8\xb2\xa8\xe5\xb9\xa3\xe8\x81\xaf\xe7\x9b\x9f'],
+ 'VACACIONES DE VERANO': ['\xe6\x9a\x91\xe5\x81\x87'],
+ 'CAFE': ['\xe5\x92\x96\xe5\x95\xa1'],
+ 'ESCALADA': ['\xe6\x94\x80\xe5\xb2\xa9'],
+ 'VOLCAN': ['\xe7\x81\xab\xe5\xb1\xb1'],
+}
+
+[u'\u7bc9\u57ce',
+ u'\u570b\u6703\u57ce\u5e02',
+ u'\u65c5\u904a\u540d\u93ae',
+ u'\u65c5\u904a\u5340',
+ u'\u81ea\u7136\u8cc7\u6e90',
+ u'\u6c23\u5019',
+ u'\u53f0\u7ad9',
+ u'\u51ac\u5b63',
+ u'\u79cb\u5b63',
+ u'\u6625',
+ u'\u590f\u5b63',
+ u'\u6c23\u5019\u56e0\u7d20',
+ u'\u96e8',
+ u'\u96ea',
+]
+
+'''
+o_v = terms.values()
+merged = list(itertools.chain(*o_v))
+owl_words_ls = [x.decode('utf-8') for x in merged]
+pickle.dump(owl_words_ls,open('Documentos/TDIwordlist.owl.pkl','w'))
+
